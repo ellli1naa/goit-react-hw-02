@@ -13,7 +13,7 @@ const App = () => {
         : { good: 0, neutral: 0, bad: 0 };
     }); 
   const totalFeedback = feedback.good + feedback.neutral + feedback.bad;
-  const statistics = Math.round((feedback.good / totalFeedback) * 100) + "%";
+  const statistics = totalFeedback > 0 ? Math.round((feedback.good / totalFeedback) * 100) + "%" : "0%";
   
   useEffect(() => {
         localStorage.setItem("feedback", JSON.stringify(feedback));
@@ -31,9 +31,10 @@ const App = () => {
       <>
         <Description />
         <Options updateFeedback={updateFeedback} total={totalFeedback}/>
+        {totalFeedback > 0 && (
         <Feedback feedback={feedback} total={totalFeedback} statistics={statistics} />
-        <Notification total={totalFeedback}/>
-      
+        )}
+        {totalFeedback === 0 && <Notification total={totalFeedback} />}
       </>
     )
   }

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import PropTypes from "prop-types";
+import './Feedback.css';
 
 const Feedback = ({feedback, total, statistics}) => {
   return (
